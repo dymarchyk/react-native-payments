@@ -128,7 +128,9 @@ export default class PaymentRequest {
   ) {
     // 1. If the current settings object's responsible document is not allowed to use the feature indicated by attribute name allowpaymentrequest, then throw a " SecurityError" DOMException.
     noop();
-
+    // fix issue when calling from event emitter resolvers are not defined
+    this._acceptPromiseResolver = noop;
+    this._acceptPromiseRejecter = noop;
     // 2. Let serializedMethodData be an empty list.
     // happens in `processPaymentMethods`
 
